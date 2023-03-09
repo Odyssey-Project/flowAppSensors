@@ -1,0 +1,6 @@
+debugpy
+psutil
+flask
+flask-cors
+flask-jsonpify
+flask-restful

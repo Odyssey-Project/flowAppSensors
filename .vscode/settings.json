@@ -1,0 +1,17 @@
+{
+	"torizon_psswd": "1234",
+	"torizon_login": "torizon",
+	"torizon_ip": "192.168.0.62",
+	"host_ip": "192.168.0.51",
+	"torizon_debug_port": "6513",
+	"torizon_debug_ssh_port": "6503",
+	"torizon_debug_port2": "",
+	"torizon_debug_port3": "",
+	"torizon_gpu": "-vivante",
+	"torizon_arch": "aarch64",
+	"wait_sync": "2",
+	"torizon_run_as": "torizon",
+	"torizon_app_root": "/home/torizon",
+	"tcb.packageName": "sensors",
+	"tcb.version": "early-access"
+}
