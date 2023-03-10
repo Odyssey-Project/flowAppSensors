@@ -34,6 +34,28 @@ def index():
     # pylint: disable=line-too-long
     return "<img src='http://www.quickmeme.com/img/e7/e7ce51fa8f392143a6af3159be424b340279fd89b57ee74b77ac919562c64a99.jpg'></img>"
 
+@app.route('/sensors/last')
+@cross_origin()
+def sensors_data_last():
+    """Sensors data route"""
+
+    data = []
+
+    with open("/media/SENSORS/last", "r", encoding="utf-8") as _f:
+        for _line in _f:
+            _data = _line.split(",")
+            _temperature = _data[0]
+            _ram = _data[1]
+            _cpu = _data[2]
+
+            data.append({
+                "temperature": _temperature,
+                "ram": _ram,
+                "cpu": _cpu
+            })
+
+    return jsonify(data)
+
 @app.route('/sensors/data')
 @cross_origin()
 def sensors_data():
@@ -56,7 +78,6 @@ def sensors_data():
 
     return jsonify(data)
 
-
 def sensor_monitor():
     """Sensor monitor thread"""
 
@@ -68,7 +89,11 @@ def sensor_monitor():
 
         try:
             # WARNING: THE USB STICK MUST BE MOUNTED IN /media/SENSORS
-            # save data in a file
+            # write the last read in a file
+            with open("/media/SENSORS/last", "w", encoding="utf-8") as _f:
+                _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+
+            # append data in a file
             with open("/media/SENSORS/data", "a", encoding="utf-8") as _f:
                 _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
         # pylint: disable=broad-exception-caught
