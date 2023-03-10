@@ -14,7 +14,7 @@
 	"torizon_app_root": "/root",
 	"tcb.packageName": "sensors",
 	"tcb.version": "beta",
-	"docker_tag": "v1",
+	"docker_tag": "v2",
 	"docker_registry": "matheuscastello",
 	"docker_login": "matheuscastello"
 }

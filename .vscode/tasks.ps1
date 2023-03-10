@@ -211,7 +211,7 @@ function checkTCBInputs ([System.Collections.ArrayList] $list) {
                     ./.conf/torizonIO.ps1 `
                         package latest version ${global:config:tcb.packageName}
                 )
-                $_next++
+                $_next = ([int]$_next)++
 
                 if ($_debug) {
                     Write-Host -ForegroundColor Green `
