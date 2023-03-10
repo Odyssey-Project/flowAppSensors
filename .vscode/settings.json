@@ -10,8 +10,8 @@
 	"torizon_gpu": "-vivante",
 	"torizon_arch": "aarch64",
 	"wait_sync": "2",
-	"torizon_run_as": "torizon",
-	"torizon_app_root": "/home/torizon",
+	"torizon_run_as": "root",
+	"torizon_app_root": "/root",
 	"tcb.packageName": "sensors",
 	"tcb.version": "early-access",
 	"docker_tag": "v1"

@@ -40,4 +40,7 @@ RUN pip3 install --upgrade pip && pip3 install -r requirements-release.txt && rm
 COPY /src /app
 WORKDIR /app
 
+# we are trying to access the /media/SENSOR
+USER root
+
 CMD [ "/usr/bin/python3", "main.py", "--no-sandbox" ]
