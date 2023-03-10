@@ -100,7 +100,7 @@ def sensor_monitor():
         except Exception as _e:
             print(_e, file=sys.stderr)
 
-        time.sleep(10)
+        time.sleep(2)
 
 if __name__ == '__main__':
     # monitoring thread
