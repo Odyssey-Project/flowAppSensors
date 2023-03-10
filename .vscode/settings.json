@@ -13,5 +13,6 @@
 	"torizon_run_as": "torizon",
 	"torizon_app_root": "/home/torizon",
 	"tcb.packageName": "sensors",
-	"tcb.version": "early-access"
+	"tcb.version": "early-access",
+	"docker_tag": "v1"
 }
