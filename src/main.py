@@ -7,6 +7,7 @@
 
 from threading import Thread
 import time
+import sys
 
 # flask
 from flask import Flask
@@ -33,6 +34,29 @@ def index():
     # pylint: disable=line-too-long
     return "<img src='http://www.quickmeme.com/img/e7/e7ce51fa8f392143a6af3159be424b340279fd89b57ee74b77ac919562c64a99.jpg'></img>"
 
+@app.route('/sensors/data')
+@cross_origin()
+def sensors_data():
+    """Sensors data route"""
+
+    data = []
+
+    with open("/media/SENSORS/data", "r", encoding="utf-8") as _f:
+        for _line in _f:
+            _data = _line.split(",")
+            _temperature = _data[0]
+            _ram = _data[1]
+            _cpu = _data[2]
+
+            data.append({
+                "temperature": _temperature,
+                "ram": _ram,
+                "cpu": _cpu
+            })
+
+    return jsonify(data)
+
+
 def sensor_monitor():
     """Sensor monitor thread"""
 
@@ -42,9 +66,14 @@ def sensor_monitor():
         _r = device_info.get_ram_usage()
         _c = device_info.get_cpu_usage()
 
-        # save data in a file
-        with open("/none/data.txt", "a", encoding="utf-8") as _f:
-            _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+        try:
+            # WARNING: THE USB STICK MUST BE MOUNTED IN /media/SENSORS
+            # save data in a file
+            with open("/media/SENSORS/data", "a", encoding="utf-8") as _f:
+                _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+        # pylint: disable=broad-exception-caught
+        except Exception as _e:
+            print(_e, file=sys.stderr)
 
         time.sleep(10)
 
