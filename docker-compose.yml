@@ -5,6 +5,12 @@ services:
       context: .
       dockerfile: Dockerfile.debug
     image: ${LOCAL_REGISTRY}:5002/sensors-debug:${TAG}
+    volumes:
+      - type: bind
+        source: /media
+        target: /media
+        bind:
+          propagation: shared
     ports:
       - 6502:6502
       - 6512:6512
@@ -15,6 +21,12 @@ services:
       context: .
       dockerfile: Dockerfile
     image: ${DOCKER_LOGIN}/sensors:${TAG}
+    volumes:
+      - type: bind
+        source: /media
+        target: /media
+        bind:
+          propagation: shared
     ports:
       - 8080:8080
     logging:
