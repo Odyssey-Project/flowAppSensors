@@ -22,6 +22,8 @@ ARG APP_EXECUTABLE
 # Install required packages
 RUN apt-get -q -y update && \
     apt-get -q -y install \
+    gcc \
+    python3-dev \
     python3-minimal \
     python3-pip \
 # DOES NOT REMOVE THIS LABEL: this is used for VS Code automation
