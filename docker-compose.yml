@@ -17,3 +17,7 @@ services:
     image: ${DOCKER_LOGIN}/sensors:${TAG}
     ports:
       - 8080:8080
+    logging:
+      driver: "journald"
+      options:
+        tag: "compose"
