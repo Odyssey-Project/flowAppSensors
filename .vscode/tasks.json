@@ -374,7 +374,7 @@
             "options": {
                 "env": {
                     "DOCKER_PSSWD": "${command:docker_password}",
-                    "TORIZON_ARCH": "${input:archList}"
+                    "TORIZON_ARCH": "${command:torizon_arch}"
                 }
             },
             "args": [
