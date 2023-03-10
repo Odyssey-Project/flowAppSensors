@@ -209,7 +209,7 @@ function checkTCBInputs ([System.Collections.ArrayList] $list) {
             if ($item.Contains("tcb.getNextPackageVersion")) {
                 $_next =  (
                     ./.conf/torizonIO.ps1 `
-                        target latest version ${global:config:tcb.packageName}
+                        package latest version ${global:config:tcb.packageName}
                 )
                 $_next++
 
@@ -255,7 +255,7 @@ function checkConfig ([System.Collections.ArrayList] $list) {
 
             $value = Invoke-Expression "echo $item"
 
-            if ($value.Contains("`${workspaceFolder")) {
+            if ($null -ne $value -and $value.Contains("`${workspaceFolder")) {
                 $item = $value
             }
         }
