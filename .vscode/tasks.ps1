@@ -207,11 +207,11 @@ function checkTCBInputs ([System.Collections.ArrayList] $list) {
         if ($item.Contains("`${command:tcb")) {
 
             if ($item.Contains("tcb.getNextPackageVersion")) {
-                $_next =  (
+                $_ret =  (
                     ./.conf/torizonIO.ps1 `
                         package latest version ${global:config:tcb.packageName}
                 )
-                $_next = ([int]$_next)++
+                $_next = [System.Int32]::Parse($_ret) +1
 
                 if ($_debug) {
                     Write-Host -ForegroundColor Green `
