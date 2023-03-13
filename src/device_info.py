@@ -22,6 +22,7 @@ __copyright__ = 'Copyright 2019 Toradex AG'
 #
 
 
+# pylint: disable=too-many-instance-attributes
 class DeviceInfo:
     """Device Info class"""
 
@@ -46,6 +47,7 @@ class DeviceInfo:
     def __bash_command(self, cmd):
         """Execute a bash command and return the output"""
 
+        # pylint: disable=consider-using-with
         process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         if error:
@@ -57,6 +59,7 @@ class DeviceInfo:
         """Get temperature from thermal zone"""
 
         # get from thermal zone
+        # pylint: disable=consider-using-with
         _f = open("/sys/class/thermal/thermal_zone" + str(index) + "/temp", "r", encoding="utf-8")
         temp = int(_f.read())
         # kernel int to float

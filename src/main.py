@@ -96,7 +96,7 @@ def sensor_monitor():
             # append data in a file
             with open("/media/SENSORS/data", "a", encoding="utf-8") as _f:
                 _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
-        # pylint: disable=broad-exception-caught
+        # pylint: disable=broad-except
         except Exception as _e:
             print(_e, file=sys.stderr)
 
