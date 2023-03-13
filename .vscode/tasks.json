@@ -1534,6 +1534,26 @@
                 "id": "flame",
                 "color": "terminal.ansiYellow"
             }
+        },
+        {
+            "label": "pylint",
+            "command": "DOCKER_HOST=''",
+            "type": "shell",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "args": [
+                "docker",
+                "run",
+                "--rm",
+                "-i",
+                "-v",
+                "${PWD}:/code",
+                "python:3",
+                "bash",
+                "-c",
+                "'pip install pylint && pip install -r /code/requirements-release.txt && pylint /code/src/*.py'"
+            ]
         }
     ],
     "inputs": [
