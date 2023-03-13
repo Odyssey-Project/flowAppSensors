@@ -14,7 +14,7 @@
 	"torizon_app_root": "/root",
 	"tcb.packageName": "sensors",
 	"tcb.version": "beta",
-	"tcb.fleetName": "prod",
+	"tcb.fleetName": "Ninja Turtles",
 	"docker_tag": "v3",
 	"docker_registry": "matheuscastello",
 	"docker_login": "matheuscastello"
