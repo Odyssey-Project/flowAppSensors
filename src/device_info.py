@@ -51,7 +51,6 @@ class DeviceInfo:
         process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE)
         output, error = process.communicate()
         if error:
-            # pylint: disable=broad-exception-raised
             raise Exception(error)
         return output
 
