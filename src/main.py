@@ -108,6 +108,7 @@ if __name__ == '__main__':
     thread.start()
 
     print("Flask working well")
+    print("FROM DEMO")
     app.run(host='0.0.0.0', port='8080')
 else:
     print(__name__)
