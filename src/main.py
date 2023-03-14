@@ -8,6 +8,7 @@
 from threading import Thread
 import time
 import sys
+import os
 
 # flask
 from flask import Flask
@@ -24,6 +25,8 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 api = Api(app)
+
+sensor_data_buffer = []
 
 # the API will be used by the GUI to get the data
 @app.route('/')
@@ -88,14 +91,24 @@ def sensor_monitor():
         _c = device_info.get_cpu_usage()
 
         try:
-            # WARNING: THE USB STICK MUST BE MOUNTED IN /media/SENSORS
-            # write the last read in a file
-            with open("/media/SENSORS/last", "w", encoding="utf-8") as _f:
-                _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+            # check if the /media/SENSORS exists
+            if not os.path.exists("/media/SENSORS"):
+                sensor_data_buffer.append(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+            else:
+                # write the last read in a file
+                with open("/media/SENSORS/last", "w", encoding="utf-8") as _f:
+                    _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
 
-            # append data in a file
-            with open("/media/SENSORS/data", "a", encoding="utf-8") as _f:
-                _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+                # append data in a file
+                with open("/media/SENSORS/data", "a", encoding="utf-8") as _f:
+                    _f.write(str(_t) + "," + str(_r) + "," + str(_c) + "\n")
+
+                if len(sensor_data_buffer) > 0:
+                    with open("/media/SENSORS/data", "a", encoding="utf-8") as _f:
+                        for _line in sensor_data_buffer:
+                            _f.write(_line)
+
+                    sensor_data_buffer.clear()
         # pylint: disable=broad-except
         except Exception as _e:
             print(_e, file=sys.stderr)
